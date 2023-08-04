@@ -1,0 +1,20 @@
+RewriteEngine On
+
+# Disable directory listing
+Options -Indexes
+
+# Deny access to subdirectories
+RewriteCond %{REQUEST_FILENAME} -d [OR]
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+# RewriteCond %{REQUEST_URI} \.(html|php)$ [NC]
+# RewriteCond %{REQUEST_URI} !^/index\.php$ [NC]
+# RewriteCond %{REQUEST_URI} !^/tollfast\.png [NC]
+# RewriteCond %{REQUEST_URI} !^/tollfast\.apk [NC]
+# RewriteCond %{REQUEST_URI} !^/$ [NC]
+# RewriteCond %{REQUEST_URI} !^/assets/ [NC]
+RewriteRule ^ index.php?page=undefined [L]
+
+# Route requests to index.php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ index.php?page=$1 [NC,L]
